@@ -9,9 +9,26 @@ def opcode(code, operand1, operand2):
         return operand1 * operand2
 
 def both_parts():
-    program_run = ProgramRun(Path(sys.argv[1]).read_text())
+    starting_program_input = Path(sys.argv[1]).read_text()
+    program_run = TwoInputProgramRun(starting_program_input, 12, 2)
     program_run.run()
     print(str(program_run.output()))
+
+    result = part2_brute_force(starting_program_input, 19690720)
+    print(str(part2_combine(result)))
+
+def part2_brute_force(program_text, target_value):
+    i = 0
+    j = 0
+    for i in range (0, 99):
+        for j in range (0, 99):
+            program_run = TwoInputProgramRun(program_text, i, j)
+            program_run.run()
+            if (program_run.output() == target_value):
+                return (i, j)
+
+def part2_combine(tuple):
+    return (100 * tuple[0]) + tuple[1]
 
 class ProgramRun:
     program_counter = 0
@@ -40,9 +57,17 @@ class ProgramRun:
     def run(self):
         while not self.program_finished:
             self.step()
-    
     def output(self):
-        return str(self.program[0])
+        return self.program[0]
+
+class TwoInputProgramRun (ProgramRun):
+    def __init__(self, program_string, input1, input2):
+        super().__init__(program_string)
+        self.program[1] = input1
+        self.program[2] = input2
+
+    def output(self):
+        return self.program[0]
 
 if __name__ == '__main__':
     both_parts()

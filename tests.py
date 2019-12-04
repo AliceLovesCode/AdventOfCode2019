@@ -1,4 +1,5 @@
 import unittest
+from pathlib import Path
 import day1
 import day2
 
@@ -34,6 +35,17 @@ class TestAdvent(unittest.TestCase):
                 program_run = day2.ProgramRun(check[0])
                 self.assertEqual(program_run.program, check[1])
 
+    def test_day2_part2_brute_force(self):
+        checklist = [((Path("./day2_input.txt").read_text(),5098658), (12, 2))]
+        for check in checklist:
+            with self.subTest(check=check):
+                self.assertEqual(day2.part2_brute_force(check[0][0], check[0][1]),check[1])
+
+    def test_day2_part2_combine(self):
+        checklist = [((12, 2), 1202)]
+        for check in checklist:
+            with self.subTest(check=check):
+                self.assertEqual(day2.part2_combine(check[0]), check[1])
 
 if __name__ == '__main__':
     unittest.main()
