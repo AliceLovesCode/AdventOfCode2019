@@ -35,6 +35,21 @@
             "program": "${workspaceFolder}/tests_day2.py"
         },
         {
+            "name": "Python: Day 4",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/day4.py",
+            "args": [
+                "171309", "643603"
+            ]
+        }, 
+        {
+            "name": "Python: Test Day 4",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tests_day4.py"
+        },
+        {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
